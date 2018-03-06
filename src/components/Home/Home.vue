@@ -43,7 +43,7 @@
             <img class='goods-img' :src='selected && selected.img_url'/>
         </div>
         <div>
-          <el-button>加入购物车</el-button>
+
           <el-button type="primary">立即购买</el-button>
         </div>
     </modal-dialog>
@@ -54,15 +54,18 @@
 import ItemList from './ItemList.vue';
 import ModalDialog from '@/components/Dialog/dialog.vue';
 import faker from "@/fixtures/faker";//数据仿真
+
+
 //判断是否开发环境
 const debug=process.env.NODE_ENV !== 'production';
+
 
 export default {
   name: 'Home',
   data () {
     return {
       selected:undefined,
-      
+
     }
   },
   created(){
