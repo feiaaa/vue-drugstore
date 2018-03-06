@@ -1,0 +1,7 @@
+{
+  "slides":[{"id":1,"img_url":"banner1.jpg","title":"123456"},{"id":2,"img_url":"banner2.jpg","title":"123456"}],
+  "announcement": "推荐商品全场八折买一送二",
+  "latestUpdated":[{"id":1,"img_url":"medi.jpg","drug_name":"复方草珊瑚含片","specif_cation":"10gx10","goods_code":["000122789","a2"],"shop_price":100},{"id":2,"img_url":"medi.jpg","drug_name":"复方草珊瑚含片","specif_cation":"10gx10","goods_code":["000122789","a2"],"shop_price":23}],
+  "recommended":[{"id":1,"img_url":"medi.jpg","drug_name":"1复方草珊瑚含片","specif_cation":"10gx10","goods_code":["000122789"],"shop_price":100},{"id":2,"img_url":"medi.jpg","drug_name":"复方草珊瑚含片","specif_cation":"10gx10","goods_code":["000122789"],"shop_price":102}]
+
+}
