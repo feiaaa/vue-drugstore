@@ -2,6 +2,10 @@
 
 > 一个使用vue搭建的商城app（目前仅含商品列表页和商品详情页）
 
+## 项目需要
+> nodejs 6.0+
+> element ui
+
 ## Build Setup
 
 ``` bash

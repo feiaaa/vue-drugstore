@@ -31,7 +31,7 @@
     </div>
     <div class="section">
       <!--编辑推荐-->
-      <item-list :items='recommended' heading='编辑推荐'></item-list>
+      <item-list :items='recommended' heading='推荐商品'></item-list>
     </div>
     <!--商品详情弹框，ok后改成el弹框-->
     <modal-dialog ref="dialog" @dialogClose='selected=undefined'>

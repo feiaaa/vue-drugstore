@@ -1,5 +1,5 @@
 @import "./item.less";
-@import "@/Home/home.less";
+
 <template id="ItemDetail">
   <div class="div1">
     <div class="section">
@@ -17,11 +17,11 @@
       <div className="info-item">
         <input v-model='$route.params.id' style='display:none'/>
 
-  				<div className='content-M'><b>商品名：</b><span>{{goods.drugName}}</span></div>
-  				<div className='content-M'><b>通用名：</b><span>{{goods.comName}}</span></div>
-  				<div className='content-M'><b>规格：</b><span>{{goods.specifCation}}</span></div>
-  			  <div className='content-M'><b>生产企业：</b><span>{{goods.goodsCompany}}</span></div>
-  				<div className='content-M'><b>品牌：</b><span>{{goods.barndId}}</span></div>
+  				<div class='content-M'><b>商品名：</b><span>{{goods.drugName}}</span></div>
+  				<div class='content-M'><b>通用名：</b><span>{{goods.comName}}</span></div>
+  				<div class='content-M'><b>规格：</b><span>{{goods.specifCation}}</span></div>
+  			  <div class='content-M'><b>生产企业：</b><span>{{goods.goodsCompany}}</span></div>
+  				<div class='content-M'><b>品牌：</b><span>{{goods.barndId}}</span></div>
 
   				<!--<div className='content-M'><b>药品类型：</b><span>{pubilcFunc.drugCategory(drugCategory)}</span></div>
   				<div className='content-M'><b>药品属性：</b><span>{pubilcFunc.goodsProperty(goodsProperty)}</span></div>
@@ -65,7 +65,7 @@ export default {
     if(debug){
       //获取item.json里的数据
       const itemData=DetailPageData;
-      console.log('itemData',itemData);
+      // console.log('itemData',itemData);
       for(var prop in itemData) {
         this[prop]=itemData[prop];
       };
@@ -73,6 +73,9 @@ export default {
     else{
       //连服务器获得数据(同home)
     }
+  },
+  mounted(){
+    document.title = "商品详情"
   },
   methods:{
     he:function(hash,type){

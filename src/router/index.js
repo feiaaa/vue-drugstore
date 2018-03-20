@@ -21,7 +21,9 @@ export default new Router({
     {
       path:'/itemdetail/:id',
       component:ItemDetail,
-      name:'goodsDetail'
+      name:'goodsDetail',
+      
+
     },
 
   ]
