@@ -1,19 +1,37 @@
 import Vue from 'vue'
-import App from './App'
-
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI)
-import './Iconfont/iconfont.css'; //字体图标
-require('!style-loader!css-loader!less-loader!./assets/less/main.less');
-
+import App from './App.vue'
 import router from './router'
 
-Vue.config.productionTip = false
+import ECharts from 'vue-echarts'
+import { use } from 'echarts/core'
+import {
+  CanvasRenderer
+} from 'echarts/renderers'
+import {
+  BarChart, PieChart
+} from 'echarts/charts'
+import {
+  GridComponent,
+  TooltipComponent
+} from 'echarts/components'
+import { LegendComponent } from 'echarts/components';
+import { TitleComponent } from 'echarts/components';
+   
+use([
+  CanvasRenderer,
+  BarChart,PieChart,
+  GridComponent,
+  TooltipComponent,
+  LegendComponent,
+  TitleComponent
+]);
 
-/* eslint-disable no-new */
+Vue.config.productionTip = false;
+
+// 全局注册组件（也可以使用局部注册）
+Vue.component('v-chart', ECharts)
+
 new Vue({
-  el: '#app',
+  render: h => h(App),
   router,
-  render: h => h(App)
-})
+}).$mount('#app')

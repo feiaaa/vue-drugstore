@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Home from '@/components/Home/Home.vue'
-import Me from '@/components/Me/Me.vue'
-import ItemDetail from '@/components/Item/ItemDetail.vue'
+
+import Chart1 from '@/components/Chart1.vue'
+import ChartById from '@/components/ChartById.vue'
 
 Vue.use(Router)
 
@@ -14,14 +14,14 @@ export default new Router({
     {
       path: '/',
       components: {
-        default: Home
+        default: HelloWorld
       }
     },
-    {path:'/me',component:Me},
+    {path:'/chart',component:Chart1},
     {
-      path:'/itemdetail/:id',
-      component:ItemDetail,
-      name:'goodsDetail',
+      path:'/chartdetail/:id',
+      component:ChartById,
+      name:'chartDetail',
       
 
     },

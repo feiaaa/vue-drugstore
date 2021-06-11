@@ -1,31 +1,35 @@
 # vue-drugstore
 
-> 一个使用vue搭建的商城app（目前仅含商品列表页和商品详情页）
+> 一个使用vue搭建的图表项目，这个和master分支的完全不一样，按需添加内容
 
 ## 项目需要
 > nodejs 6.0+
-> element ui
+> 
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8088
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+## Project setup
+```
+yarn install
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### Compiles and hot-reloads for development
+```
+yarn serve
+or
+yarn start
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 参考文献
+[vue-echarts](https://github.com/ecomfe/vue-echarts)
