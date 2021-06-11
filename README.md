@@ -33,3 +33,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 参考文献
 [vue-echarts](https://github.com/ecomfe/vue-echarts)
+[vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout)

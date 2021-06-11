@@ -40,8 +40,8 @@ module.exports = {
     configureWebpack: {
       resolve: {
         alias: {
-          "@": resolve("src"),
-          "@@": resolve("src/components")
+          "@": resolvePath("src"),
+          "@@": resolvePath("src/components")
         }
       }
     }
