@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
-import Chart1 from '@/components/Chart1.vue'
+import ChartPage from '@/components/ChartPage.vue'
 import ChartById from '@/components/ChartById.vue'
 
 Vue.use(Router)
@@ -17,7 +17,7 @@ export default new Router({
         default: HelloWorld
       }
     },
-    {path:'/chart',component:Chart1},
+    {path:'/chart',component:ChartPage},
     {
       path:'/chartdetail/:id',
       component:ChartById,

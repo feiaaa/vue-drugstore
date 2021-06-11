@@ -32,19 +32,62 @@
           @click="handleClick"
         />
    </div>
+   <div class="div1">
+       <v-chart
+          :option="mapOption"
+          :init-options="initOptions"
+          ref="map"
+          autoresize
+        />
+  </div>
   </div>
 </template>
 
 <script>
+// 引入echart start
+import ECharts from 'vue-echarts'
+import { use,registerMap } from 'echarts/core'
+import {
+  CanvasRenderer
+} from 'echarts/renderers'
+import {
+  BarChart, MapChart, PieChart
+} from 'echarts/charts'
+import {
+  GridComponent,
+  TooltipComponent,TitleComponent ,LegendComponent,VisualMapComponent
+} from 'echarts/components'
+   
+use([
+  CanvasRenderer,
+  BarChart,PieChart,MapChart,
+  GridComponent,
+  TooltipComponent,
+  LegendComponent,
+  TitleComponent,VisualMapComponent
+]);
+
+
+import chinaMap from "@/mapdata/china.json";// Map of China
+
+ registerMap("china", chinaMap);// registering map data
+//引入echart end
+
+// 引入表单组件
+    import ChartMapCn from './Charts/ChartMapCn.vue'
+
+    import mapOption from './Charts/mapData'
     import {buildOptionBar,optionPie,companyList} from './echartOption'
     const axios = require('axios');
     console.log(Object.keys(companyList).map(k=>({name:companyList[k],value:k})),'=36')
     export default {
         name:'Charts',
-        
+        components:{
+            'v-chart': ECharts,
+            'ChartMapCn':ChartMapCn
+        },        
         data: () => ({
-            form:{companyCode:'000000',text:''},
-            
+            form:{companyCode:'000000',text:''},// 输入框            
             selectoptions:Object.keys(companyList).map(k=>({name:companyList[k],value:k}))||[],
             barLoading: false,
             barLoadingOptions: {
@@ -54,7 +97,9 @@
             },
             initOptions:{renderer:'canvas'},
             option: buildOptionBar([]),
-            option2:optionPie
+            option2:optionPie,
+            mapOption: mapOption,
+            
         }),
         created(){ 
             this.handleSubmit()     
