@@ -9,9 +9,34 @@
         </select>
         <input type="submit" value="提交"/>
     </form>
+    <grid-layout :layout.sync="layout"
+                 :col-num="12"
+                 :row-height="30"
+                 :vertical-compact="true"
+                 :use-css-transforms="true"
+                 :style="{width:'100%'}"
+    >
+    <grid-item v-for="item in layout"
+                   :static="item.static"
+                   :x="item.x"
+                   :y="item.y"
+                   :w="item.w"
+                   :h="item.h"
+                   :i="item.i"
+                   :key="item.i"
+        >
+            <span class="text">{{item.i}},dragable:{{!item.static}}</span>
+            <v-chart
+                :option="option[item.i]"
+                :init-options="initOptions"
+                :ref="chartType[item.i]"
+                autoresize
+                />
+        </grid-item>
+    </grid-layout>
     <div class="div1">
         <v-chart
-          :option="option"
+          :option="option[0]"
           :init-options="initOptions"
           ref="bar"
           theme="ovilia-green"
@@ -25,7 +50,7 @@
    </div>
    <div class="div1">
    <v-chart
-          :option="option2"
+          :option="option[1]"
           :init-options="initOptions"
           ref="pie"
           autoresize          
@@ -38,6 +63,12 @@
           :init-options="initOptions"
           ref="map"
           autoresize
+        />
+  </div>
+  <div class="div1">
+       <rank-chart
+          :toChildrenData="rankDataSource"
+          :initOptions="initOptions"
         />
   </div>
   </div>
@@ -68,87 +99,102 @@ use([
 ]);
 
 
+
 import chinaMap from "@/mapdata/china.json";// Map of China
 
  registerMap("china", chinaMap);// registering map data
-//引入echart end
+// 引入echart end
+import RankChart from './Charts/PagingChart/RankChart.vue'
+import mapOption from './Charts/Map/mapData'
+import {dataSource} from './Charts/PagingChart/pageData'
+    
+// 引入grid
+import { GridLayout, GridItem } from "vue-grid-layout";
+// import _ from 'lodash';
+import vue from 'vue'
 
-// 引入表单组件
-    import ChartMapCn from './Charts/ChartMapCn.vue'
-
-    import mapOption from './Charts/mapData'
-    import {buildOptionBar,optionPie,companyList} from './echartOption'
-    const axios = require('axios');
-    console.log(Object.keys(companyList).map(k=>({name:companyList[k],value:k})),'=36')
-    export default {
-        name:'Charts',
-        components:{
-            'v-chart': ECharts,
-            'ChartMapCn':ChartMapCn
-        },        
-        data: () => ({
-            form:{companyCode:'000000',text:''},// 输入框            
-            selectoptions:Object.keys(companyList).map(k=>({name:companyList[k],value:k}))||[],
-            barLoading: false,
-            barLoadingOptions: {
-                text: "Loading…",
-                color: "#4ea397",
-                maskColor: "rgba(255, 255, 255, 0.4)"
-            },
-            initOptions:{renderer:'canvas'},
-            option: buildOptionBar([]),
-            option2:optionPie,
-            mapOption: mapOption,
-            
-        }),
-        created(){ 
-            this.handleSubmit()     
+// form 表单和请求等
+import {buildOptionBar,optionPie,companyList} from './echartOption'
+const axios = require('axios');
+// console.log(Object.keys(companyList).map(k=>({name:companyList[k],value:k})),'=36')
+export default {
+    name:'Charts',
+    components:{
+        GridLayout, GridItem,
+        'v-chart': ECharts,
+        'rank-chart':RankChart
+    },        
+    data: () => ({
+        layout:[{"x":0,"y":0,"w":2,"h":2,"i":"0", static: false},
+                {"x":2,"y":0,"w":5,"h":4,"i":"1", static: true},],
+        form:{companyCode:'000000',text:''},// 输入框            
+        selectoptions:Object.keys(companyList).map(k=>({name:companyList[k],value:k}))||[],
+        barLoading: false,
+        barLoadingOptions: {
+            text: "Loading…",
+            color: "#4ea397",
+            maskColor: "rgba(255, 255, 255, 0.4)"
         },
-        methods: {
-            handleClick(...args) {
-            console.log("click from echarts", ...args);
-            },
-            handleZrClick(...args) {
-            console.log("click from zrender", ...args);
-            },
-            handleSubmit(e){
-                e&& e.preventDefault();
-                  
-                const {companyCode}=this.form;console.log(this.form,'=this.form',companyCode)
-                axios.get(`/cs/risk/index/company/risk_amount?companyCode=${companyCode}`)
-                .then(response => {
-                    console.log(response,'=69')
-                    if(response.data.code=='000000'){
-                        const barData = response.data.data.companyRiskAmountByMonthRespDTOS;
-                        console.log(barData,'=this.barData')
-                        this.option=buildOptionBar(barData)
-                        this.barLoading = false;
-                    }
-                    
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.errored = true
-                })
-                .finally(() => this.barloading = false)
-                
-              
-            },//
-            greet: function (event) {
-                // `this` 在方法里指向当前 Vue 实例
-                // console.log('Hello ' + this.name + '!')
-                // `event` 是原生 DOM 事件
-                if (event) {
-                    console.log(event.target.tagName)
-                }
-            }
-        },
+        initOptions:{renderer:'canvas'},
+        option:[buildOptionBar([]),optionPie],
+        chartType:['bar','pie'],
+        mapOption: mapOption,
+        rankDataSource:dataSource
         
-    }
+    }),
+    created(){ 
+        this.handleSubmit()     
+    },
+    methods: {
+        handleClick(...args) {
+        console.log("click from echarts", ...args);
+        },
+        handleZrClick(...args) {
+        console.log("click from zrender", ...args);
+        },
+        handleSubmit(e){
+            e&& e.preventDefault();                
+            const {companyCode}=this.form;console.log(this.form,'=this.form',companyCode)
+            axios.get(`/cs/risk/index/company/risk_amount?companyCode=${companyCode}`)
+            .then(response => {
+                // console.log(response,'=69')
+                if(response.data.code=='000000'){
+                    const barData = response.data.data.companyRiskAmountByMonthRespDTOS;
+                    vue.set(this.option,0,buildOptionBar(barData))
+                    this.barLoading = false;
+                }
+                
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.barloading = false)
+            
+            
+        },//
+        greet: function (event) {
+            // `this` 在方法里指向当前 Vue 实例
+            // console.log('Hello ' + this.name + '!')
+            // `event` 是原生 DOM 事件
+            if (event) {
+                console.log(event.target.tagName)
+            }
+        }
+    },
+    
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.vue-grid-item  {
+    background: #fff0f0;
+}
+.vue-grid-item .static {
+    background: #cce;
+}
+
 .div1 {
   height:600px;
   margin: 40px 0 0;
