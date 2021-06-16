@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home/Home.vue'
 import Me from '@/components/Me/Me.vue'
 import ItemDetail from '@/components/Item/ItemDetail.vue'
+import ChartPage from '@/components/ChartPage.vue'
 
 Vue.use(Router)
 
@@ -17,6 +18,7 @@ export default new Router({
         default: Home
       }
     },
+    {path:'/chart',component:ChartPage},
     {path:'/me',component:Me},
     {
       path:'/itemdetail/:id',

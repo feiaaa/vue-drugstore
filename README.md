@@ -29,3 +29,8 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+# other
+#### configs
+- master分支的配置在/config/index.js;cli3 分支的在vue.config.js

@@ -3,6 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const target='http://life-test.leapstack.cn/'
 
 module.exports = {
   dev: {
@@ -10,7 +11,28 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    // proxyTable: {},
+    proxyTable: {
+      '/rk': {
+          target: target,//设置你调用的接口域名和端口号 别忘了加http
+          changeOrigin: true,//允许跨域
+          pathRewrite: {
+            '^/rk': '/rk' //这个是定义要访问的路径，名字随便写 
+          }
+      },
+      // '/gw': {
+      //   target: target,
+      //   changeOrigin: true,
+      //   pathRewrite: { "^/gw": "/gw" }
+      // },
+      '/cs': {
+        target: 'http://rc-dev.internal.leapstack.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/cs': '/cs' 
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
