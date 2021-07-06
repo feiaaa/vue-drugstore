@@ -71,6 +71,20 @@
           :initOptions="initOptions"
         />
   </div>
+      
+   <div v-lazy-container="{selector: 'img'}">
+       <p>图片lazyload</p>
+       <!-- 此处写的是编译后路径-->
+       <img data-src="/assets/img/logo.png" height='100' width='100' style="border:1px solid">
+       <!-- 相对路径 添加require -->
+       <img :data-src="require('../assets/logo.png')" height='100' width='100' style="border:1px solid">
+       <!-- 错误路径 -->
+       <img data-src="/assets/img/logo1.png" height='100' width='100' style="border:1px solid">
+       
+       
+   </div>
+   <p>图片无lazyload</p>
+   <img src="../assets/logo.png" height='100' width='100'/>
   </div>
 </template>
 

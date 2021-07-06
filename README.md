@@ -47,9 +47,12 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
+### 配置项 Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 参考文献
 [vue-echarts](https://github.com/ecomfe/vue-echarts)
 [vue-grid-layout](https://github.com/jbaysolutions/vue-grid-layout)
+
+### 疑难问题 Q&A
+[vue-lazyload 图片路径](https://blog.csdn.net/runOnWay/article/details/79052205)
