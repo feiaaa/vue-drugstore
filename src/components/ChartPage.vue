@@ -7,7 +7,8 @@
         下拉框: <select name='companyCode' placeholder="下拉" v-model="form.companyCode">
             <option v-bind:key="el.value" :value="el.value" v-for="el in selectoptions" >{{el.name}}</option> 
         </select>
-        <input type="submit" value="提交"/>
+      <!--要给这个按钮 节流操作，防止重复提交-->
+        <input type="submit" value="提交" />
     </form>
     <el-row>
         <el-col :span="8"  v-for="(item,i) in option" :key="i">
@@ -100,6 +101,8 @@ import vue from 'vue'
 import {buildOptionBar,optionPie,companyList} from './Charts/echartOption'
 const axios = require('axios');
 // console.log(Object.keys(companyList).map(k=>({name:companyList[k],value:k})),'=36')
+// 接口api化
+import qa from '../api'
 export default {
     name:'Charts',
     components:{
@@ -122,9 +125,10 @@ export default {
         rankDataSource:dataSource
         
     }),
-    created(){ 
+    mounted(){
         this.handleSubmit()     
     },
+
     methods: {
         handleClick(...args) {
         console.log("click from echarts", ...args);
@@ -135,6 +139,7 @@ export default {
         handleSubmit(e){
             e&& e.preventDefault();                
             const {companyCode}=this.form;console.log(this.form,'=this.form',companyCode)
+            // 旧版写法
             axios.get(`/cs/risk/index/company/risk_amount?companyCode=${companyCode}`)
             .then(response => {
                 // console.log(response,'=69')
@@ -150,7 +155,11 @@ export default {
                 this.errored = true
             })
             .finally(() => this.barloading = false)
-            
+
+
+          // 新版写法(请求自动绑定)
+          qa.v(this)
+          qa.chart.getChart()
             
         },//
         greet: function (event) {
