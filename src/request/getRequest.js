@@ -2,7 +2,7 @@
 import  server from './server'
 function myserver() {
   this.server=server;
-  this.nowhandle=null;// 处理板顶数据用
+  this.nowhandle=null;// 处理绑定数据用
 
 }
 
@@ -10,7 +10,7 @@ function myserver() {
 myserver.prototype.parseRouter=function (name,urlOb) {
   this[name]={};
   Object.keys(urlOb).forEach(apiName=>{
-    this[name][apiName]=this.sendMsg.bind(this,apiName,urlOb[apiName])
+    this[name][apiName]=this.sendMsg.bind(this,name,apiName,urlOb[apiName])
     // 节流flag
     this[name][apiName].state='ready'
   });
@@ -18,27 +18,38 @@ myserver.prototype.parseRouter=function (name,urlOb) {
 // 自动绑定
 myserver.prototype.v=function (vueObj) {
   this.nowhandle=vueObj
+  return this;
 }
 // 轮子要留出扩展接口 config就是扩展接口
 myserver.prototype.sendMsg=function (moduleName,apiName,url,config) {
   var config = config || {}
-  var type = config.type || 'get';
+  var method = config.method || 'get';
   var data=config.data||{};
   var bindName=config.bindName || apiName;
   var self=this;
-
+  // 传参处理
+  var params = data
+  if (method === 'get') {
+    params = {
+      params: data
+    }
+  }
+  
   // 处理请求-分模块：效果（eg：loading）和数据
-  var before=function (mes) {
-    console.log(mes)
-    self[moduleName][apiName] ='ready'
+  var before=function (msg) {
+    self[moduleName][apiName].state ='ready'
+    return msg
   }
-  var defaultFn=function () {
-
+  var defaultFn=function (msg) {
+    console.log(msg,'=default =44')
+    if(msg.status=='200')return msg.data
+    return msg
   }
-  var success=config.success||defaultFn;// 没写处理方法就按默认处理、
-  if(this[name][apiName].state=='ready'){
-    this.server[type](url,data).then(before).then(success).catch(e=>console.log(e))
-    this[name][apiName].state='waiting'
+  var success=config.success||defaultFn;// 没写处理方法就按默认处理
+  if(this[moduleName][apiName].state=='ready'){
+    
+    this[moduleName][apiName].state='waitting'
+    return this.server[method](url,params).then(before).then(success).catch(e=>console.log(e))
   }
 
 }

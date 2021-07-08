@@ -1,7 +1,11 @@
 # vue-drugstore
 
-> 一个使用vue搭建的商城app（目前仅含商品列表页和商品详情页）
+> 分支 master:一个使用vue搭建的商城app（目前仅含商品列表页和商品详情页）
+> 分支 cli3:以vue-cli，simple模式 的方式起了一个单页图表页面，不含element-ui,详见对方分支的readMe
 
+## axios二次封装（仅限于master分支）
+> 把请求内容集中到指定文件夹，避免视图页面满屏axios，具体可看```src/ChartPage.vue```
+> 详细文档和分析见[这里](./doc/axios_analysis.md)
 ## 项目需要
 > nodejs 6.0+
 > element ui

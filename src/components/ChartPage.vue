@@ -20,9 +20,10 @@
                 />
         </el-col>   
     </el-row>
+    {{option1}}
     <div class="div1">
         <v-chart
-          :option="option[0]"
+          :option="option1"
           :init-options="initOptions"
           ref="bar"
           theme="ovilia-green"
@@ -31,7 +32,7 @@
           :loadingOptions="barLoadingOptions"
           @zr:click="handleZrClick"
           @click="handleClick"
-          v-bind:style="{border:'1px solid red'}"  
+          v-bind:style="{border:'1px solid blue'}"  
         />
    </div>
    <div class="div1">
@@ -120,6 +121,7 @@ export default {
         },
         initOptions:{renderer:'canvas'},
         option:[buildOptionBar([]),optionPie],
+        option1:buildOptionBar([]),
         chartType:['bar','pie'],
         mapOption: mapOption,
         rankDataSource:dataSource
@@ -137,29 +139,47 @@ export default {
         console.log("click from zrender", ...args);
         },
         handleSubmit(e){
+            const self=this;
             e&& e.preventDefault();                
             const {companyCode}=this.form;console.log(this.form,'=this.form',companyCode)
-            // 旧版写法
-            axios.get(`/cs/risk/index/company/risk_amount?companyCode=${companyCode}`)
-            .then(response => {
-                // console.log(response,'=69')
-                if(response.data.code=='000000'){
-                    const barData = response.data.data.companyRiskAmountByMonthRespDTOS;
-                    vue.set(this.option,0,buildOptionBar(barData))
-                    this.barLoading = false;
-                }
+            // 旧版写法 axios
+            // axios.get(`/cs/risk/index/company/risk_amount?companyCode=${companyCode}`)
+            // .then(response => {
+            //     // console.log(response,'=69')
+            //     if(response.data.code=='000000'){
+            //         const barData = response.data.data.companyRiskAmountByMonthRespDTOS;
+            //         vue.set(this.option,0,buildOptionBar(barData))
+            //         this.barLoading = false;
+            //     }
                 
-            })
-            .catch(error => {
-                console.log(error)
-                this.errored = true
-            })
-            .finally(() => this.barloading = false)
+            // })
+            // .catch(error => {
+            //     console.log(error)
+            //     this.errored = true
+            // })
+            // .finally(() => this.barloading = false)
 
 
           // 新版写法(请求自动绑定)
           qa.v(this)
-          qa.chart.getChart()
+          qa.chart.getChart({
+            method: 'get',
+            bindName:'option1',
+            data: {
+              companyCode
+            },
+            success:(response)=>{     
+              // 此处自定义方法                
+              const barData = response.data.data.companyRiskAmountByMonthRespDTOS;
+              // 配套方法1       
+              return buildOptionBar(barData)
+              
+              
+            },
+          }).then(response=>{
+            // 方法1:then里处理 success完的data,this 和set都可以
+            this.option1=response;
+          })
             
         },//
         greet: function (event) {
