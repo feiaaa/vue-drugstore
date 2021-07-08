@@ -1,6 +1,6 @@
 ## axios二次封装
 - 效果见图
-- ![pic](chart.jpg)
+- ![pic](chart.png)
 
 ### 文件夹分析
 具体代码解释在对应js页面里面有
