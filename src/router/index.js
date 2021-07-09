@@ -18,6 +18,7 @@ export default new Router({
         default: Home
       }
     },
+    {path:'/hi',component:HelloWorld},
     {path:'/chart',component:ChartPage},
     {path:'/me',component:Me},
     {
