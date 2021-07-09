@@ -13,6 +13,7 @@
 - 理论参考文献：[知乎专栏](https://zhuanlan.zhihu.com/p/55960017)
 - [jest常见异常处理](https://www.cnblogs.com/qpnets/p/10368998.html)
 - 使用效果如图![pic](./doc/jest-1.png)
+- [jest api doc](https://jestjs.io/zh-Hans/docs/expect)
 ## 项目需要
 > nodejs 6.0+
 > element ui

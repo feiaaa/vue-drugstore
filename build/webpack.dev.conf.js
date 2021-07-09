@@ -19,6 +19,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js',
+      'vue$': 'vue/dist/vue.esm.js' // for run-time components;
+    }
+
+    
+  },
 
   // these devServer options should be customized in /config/index.js
   devServer: {
