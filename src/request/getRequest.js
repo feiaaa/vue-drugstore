@@ -42,7 +42,10 @@ myserver.prototype.sendMsg=function (moduleName,apiName,url,config) {
   }
   var defaultFn=function (msg) {
     console.log(msg,'=default =44')
-    if(msg.status=='200')return msg.data
+    if(msg.status=='200'){
+      if(msg.data.code==='000000')self.nowhandle[bindName] = msg.data.data;
+      return msg.data
+    }
     return msg
   }
   var success=config.success||defaultFn;// 没写处理方法就按默认处理
