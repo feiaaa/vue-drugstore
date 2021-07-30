@@ -50,6 +50,7 @@
           :init-options="initOptions"
           ref="map"
           autoresize
+          :update-options="{'notMerge':true}"
         />
   </div>
   <div class="div1">
