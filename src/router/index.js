@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+// import Router from 'vue-router' // 默认Vue-Router
+import Router from './myRouter' //自定义Router
 import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home/Home.vue'
 import Me from '@/components/Me/Me.vue'
@@ -14,9 +15,7 @@ export function createRouter(){
     routes: [
       {
         path: '/',
-        components: {
-          default: Home
-        }
+        component: Home
       },
       {path:'/chart',component:ChartPage},
       {path:'/me',component:Me},

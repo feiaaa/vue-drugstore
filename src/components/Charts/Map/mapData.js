@@ -409,7 +409,7 @@ export default {
     fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif'
   },
   backgroundColor: "#404a59",
-  legend:{bottom:0,left:'center'},
+  // legend:{bottom:0,left:'center'},
   title: {
     text: "Air quality of major cities in China",
     subtext: "data from PM25.in",
@@ -422,15 +422,81 @@ export default {
   tooltip: {
     trigger: "item"
   },
-  legend: {
-    orient: "vertical",
-    y: "bottom",
-    x: "right",
-    data: ["pm2.5"],
-    textStyle: {
-      color: "#fff"
-    }
-  },
+  legend: [
+    {
+      orient: "vertical",
+      y: "bottom",
+      x:0,
+      data:data.slice(0,3).map((el,i)=>({...el,name:el.name+'-'+i})),
+      formatter:function(value){
+        const [name,index]=value.split('-');
+        const map = { 0: "a",1: "a",2: "a" };
+        const textStyle = map[index] || "d";
+        return `{${textStyle}|${(index-0)+ 1}} {name|${name}}`;
+      },      
+      textStyle: {
+        align:'left',
+        rich:{
+          a: {
+            height: 20,
+            padding: [0, 7, 0, 7],
+            borderRadius: 10,
+            backgroundColor: "#314659",
+            color: "#FFFFFF"
+          },
+          d: {
+            width: 14,
+            height: 20,
+            padding: [0, 0, 0, 7],
+            borderRadius: 10,
+            backgroundColor: "#D9D9D9",
+            color: "#FFFFFF"
+          },
+          name:{
+            color: "#111",
+          }
+        }
+      },
+      icon:"none"
+    },
+    {
+      orient: "vertical",
+      y: "bottom",
+      x:'50%',
+      data:data.slice(3,5).concat([{ name: " ", value: 0 }]).map((el,i)=>({...el,name:el.name+'-'+(i+3)})),
+      formatter:function(value){
+        const [name,index]=value.split('-');
+        const map = { 3: "d",4: "d",5: "d" ,6:"none"};
+        const textStyle = map[index];
+        return `{${textStyle}|${(index-0)+ 1}} {name|${name}}`;
+      },      
+      textStyle: {
+        align:'left',
+        rich:{
+          
+          d: {
+            width: 14,
+            height: 20,
+            padding: [0, 0, 0, 7],
+            borderRadius: 10,
+            backgroundColor: "#D9D9D9",
+            color: "#FFFFFF"
+          },
+          none: {
+            height: 20,
+            padding: [0, 7, 0, 7],
+            borderRadius: 10,
+            backgroundColor: "#314659",
+            color: "#FFFFFF"
+          },
+          name:{
+            color: "#111",
+          }
+        }
+      },
+      icon:"none"
+    },
+  ],
   // geo: {
   //   map: "china",
   //   emphasis: {

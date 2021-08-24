@@ -7,7 +7,9 @@
           :init-options="initOptions"
           ref="map"
           autoresize
+          :update-options="{'notMerge':true}"
         />
+        <!-- :update-options 装的是 setOption 配置-->
    </div>
   </div>
 </template>

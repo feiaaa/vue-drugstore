@@ -1,96 +1,52 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+
+    <div class="unit-test">
+      <h2>单元测试试写</h2>
+      <ol>
+        <li>普通方法：{{add(2,3)}}</li>
+        <li>点击事件：{{a}}<button id='button1' @click="clickPlus">+1</button></li>
+        <li>父子传值:<son :age="age" :fn="changeAge" />
+        <span>father:{{age}}</span></li>
+      </ol>
+    </div>
   </div>
 </template>
 
 <script>
+const son={
+  template:`<div style="border:1px black dotted">son:{{age}}<button @click="fn" id='button2'>-1</button></div>`,
+  props:{
+    age:{type:Number,default:0},
+    fn:{type:Function,default:function(){}},
+  }
+};
 export default {
   name: 'HelloWorld',
+  components:{'son':son},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      a:123,
+      age:16
     }
-  }
+  },
+  methods:{
+    add:function(a,b){return a+b},
+    clickPlus:function(){
+      // a click func
+      this.a++;
+    },
+    changeAge:function(){
+      this.age--;
+    },
+    m2:function (){
+      // an async func
+
+    }
+  },
+  
 }
 </script>
 
@@ -99,15 +55,7 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.unit-test{
+  border:1px solid red;
 }
 </style>
