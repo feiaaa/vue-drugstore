@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-rc.11",
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "echarts": "^5.1.1",
     "element-ui": "^2.15.2",
     "express": "^4.17.1",
