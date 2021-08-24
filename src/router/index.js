@@ -7,26 +7,50 @@ import ItemDetail from '@/components/Item/ItemDetail.vue'
 import ChartPage from '@/components/ChartPage.vue'
 
 Vue.use(Router)
+export function createRouter(){
+  return new Router({
+    mode:'history',
+    base:__dirname,
+    routes: [
+      {
+        path: '/',
+        components: {
+          default: Home
+        }
+      },
+      {path:'/chart',component:ChartPage},
+      {path:'/me',component:Me},
+      {
+        path:'/itemdetail/:id',
+        component:ItemDetail,
+        name:'goodsDetail',
 
-export default new Router({
-  mode:'history',
-  base:__dirname,
-  routes: [
-    {
-      path: '/',
-      components: {
-        default: Home
-      }
-    },
-    {path:'/chart',component:ChartPage},
-    {path:'/me',component:Me},
-    {
-      path:'/itemdetail/:id',
-      component:ItemDetail,
-      name:'goodsDetail',
-      
 
-    },
+      },
 
-  ]
-})
+    ]
+  })
+}
+// old
+// export default new Router({
+//   mode:'history',
+//   base:__dirname,
+//   routes: [
+//     {
+//       path: '/',
+//       components: {
+//         default: Home
+//       }
+//     },
+//     {path:'/chart',component:ChartPage},
+//     {path:'/me',component:Me},
+//     {
+//       path:'/itemdetail/:id',
+//       component:ItemDetail,
+//       name:'goodsDetail',
+//
+//
+//     },
+//
+//   ]
+// })

@@ -9,17 +9,21 @@
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "build:client": "webpack --config build/webpack.buildclient.js",
+    "build:server": "webpack --config build/webpack.buildserver.js"
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-rc.11",
     "axios": "^0.16.2",
     "echarts": "^5.1.1",
     "element-ui": "^2.15.2",
+    "express": "^4.17.1",
     "lodash": "^4.17.21",
     "vue": "^2.6.14",
     "vue-echarts": "^6.0.0-rc.5",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.6.14"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
