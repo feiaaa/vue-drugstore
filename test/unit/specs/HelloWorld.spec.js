@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import HelloWorld from '@/components/HelloWorld'
-// const {Son} 
-
 import { mount,shallowMount } from "@vue/test-utils";
 
 // 获取组件实例
@@ -35,6 +33,15 @@ describe('method内加法的测试', function () {
     button.trigger("click");
     expect((wrapper.vm ).a).toBe(14);
   });
+  
+  it("点击事件",()=>{
+    const wrapper = mount(HelloWorld);
+    const mockFn=jest.fn();
+    wrapper.setMethods({clickPlus:mockFn}); // 将被淘汰
+    wrapper.find("#button1").trigger("click") // 
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn.mock.calls.length).toBe(1);
+  })
 
   // 父子传值 & 点击按钮传值给子组件
   it("父传子", () => {
@@ -43,15 +50,6 @@ describe('method内加法的测试', function () {
     wrapper.vm.changeAge();
     expect(wrapper.vm.age).toBe(12);
   })
-
-  it("点击按钮传值给子组件", () => {
-    const wrapper = mount(HelloWorld.components.son);
-    const mockFn=jest.fn();
-    wrapper.setProps({fn:mockFn});
-    wrapper.find("#button2").trigger("click")
-    expect(mockFn.mock.calls.length).toBe(1);// 判断是否点了一次,todo 此处bug，可能mock写法问题
-  })
-
   // 异步
 
 });

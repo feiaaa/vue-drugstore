@@ -7,7 +7,7 @@
       <ol>
         <li>普通方法：{{add(2,3)}}</li>
         <li>点击事件：{{a}}<button id='button1' @click="clickPlus">+1</button></li>
-        <li>父子传值:<son :age="age" :fn="changeAge" />
+        <li>父子传值:<son :age="age" :fn="changeAge" ref='son'/>
         <span>father:{{age}}</span></li>
       </ol>
     </div>
@@ -15,16 +15,17 @@
 </template>
 
 <script>
-const son={
-  template:`<div style="border:1px black dotted">son:{{age}}<button @click="fn" id='button2'>-1</button></div>`,
-  props:{
-    age:{type:Number,default:0},
-    fn:{type:Function,default:function(){}},
-  }
-};
+import Son from './Son.vue'
+// const Son={
+//   template:`<div style="border:1px black dotted">son:{{age}}<button @click="fn" :id="'button2'">-1</button></div>`,
+//   props:{
+//     age:{type:Number,default:0},
+//     fn:{type:Function,default:function(){}},
+//   }
+// };
 export default {
   name: 'HelloWorld',
-  components:{'son':son},
+  components:{'son':Son},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
