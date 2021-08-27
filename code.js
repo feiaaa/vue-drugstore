@@ -1,7 +1,7 @@
 const vue = require('vue');
 const renderer= require('vue-server-renderer').createRenderer()
 const app = new vue({
-  template: "<div>this is pagel <span>{{num}}</spa</div>",
+  template: "<div>this is page1 <span>{{num}}</span></div>",
   data: {
   num: 123
    }

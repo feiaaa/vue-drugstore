@@ -10,14 +10,14 @@ const ServerConfig=merge(baseWebpackConfig,{
     libraryTarget:"commonjs2",
 
   },
-  module:{
-    rules:[
-      {
-        test:/\.(css|less)$/,
-        loader: "style-loader!css-loader!less-loader",
-      },
-    ]
-  },
+  // module:{
+  //   rules:[
+  //     {
+  //       test:/\.(css|less)$/,
+  //       loader: "style-loader!css-loader!less-loader",
+  //     },
+  //   ]
+  // },
   target:"node",
   plugins:[
     new VueSSRServerPlugin()

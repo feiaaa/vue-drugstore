@@ -14,6 +14,12 @@
 - [jest常见异常处理](https://www.cnblogs.com/qpnets/p/10368998.html)
 - 使用效果如图![pic](./doc/jest-1.png)
 - [jest api doc](https://jestjs.io/zh-Hans/docs/expect)
+
+
+## ssr
+- 简单展示 vue-server-renderer ```node code.js```
+- 分别给客户端和服务端打包 ```yarn build:client```,```yarn build:server```
+- 运行服务端```node server.js```
 ## 项目需要
 > nodejs 6.0+
 > element ui

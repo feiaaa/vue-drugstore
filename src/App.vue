@@ -6,8 +6,8 @@
     </div>
       <div class="tabs">
         <ul>
-            <router-link :to="'/'" exact tag="li"><i class="icon iconfont icon-shouye1"></i><div class="name">首页</div></router-link>
-            <router-link :to="'/me'" exact tag="li"><i class="icon iconfont icon-guke-fenzuicon"></i><div class="name">我的</div></router-link>
+            <router-link :to="'/'" exact tag="li"><div class="name">首页</div></router-link>
+            <router-link :to="'/me'" exact tag="li"><div class="name">我的</div></router-link>
     	  </ul>
       </div>
 

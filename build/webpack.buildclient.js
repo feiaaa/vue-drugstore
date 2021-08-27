@@ -8,14 +8,14 @@ const ClientConfig=merge(baseWebpackConfig,{
   entry:{
     app:"./src/entry-client.js"
   },
-  module:{
-    rules:[
-      {
-        test:/\.(css|less)$/,
-        loader: "style-loader!css-loader!less-loader",
-      },
-    ]
-  },
+  // module:{
+  //   rules:[
+  //     {
+  //       test:/\.(css|less)$/,
+  //       loader: "style-loader!css-loader!less-loader",
+  //     },
+  //   ]
+  // },
   plugins:[
     new VueSSRClientPlugin()
   ]
