@@ -1,7 +1,6 @@
 const merge=require('webpack-merge');
 const baseWebpackConfig=require("./webpack.base.conf");
 const VueSSRServerPlugin=require('vue-server-renderer/server-plugin')
-// const ExtractTextPlugin=require('extract-text-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 

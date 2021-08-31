@@ -1,14 +1,22 @@
 <template>
   <div id="app">
     <div class='content'>
-    <!--<img src="./assets/logo.png">-->
-    <router-view></router-view>
+      <el-container>
+      </el-container>
+    <el-main><router-view></router-view></el-main>
     </div>
       <div class="tabs">
-        <ul>
-            <router-link :to="'/'" exact tag="li"><i class="icon iconfont icon-shouye1"></i><div class="name">首页</div></router-link>
-            <router-link :to="'/me'" exact tag="li"><i class="icon iconfont icon-guke-fenzuicon"></i><div class="name">我的</div></router-link>
-    	  </ul>
+        <el-menu
+          router
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          >
+          <el-menu-item index="/"><i class="icon iconfont icon-shouye1"></i>首页</el-menu-item>  
+          <el-menu-item index="/me"><i class="icon iconfont icon-guke-fenzuicon"></i>我的</el-menu-item>
+          <el-menu-item index="/chart">图表</el-menu-item>
+        </el-menu>
       </div>
 
 
@@ -17,7 +25,19 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data:()=>({      
+      activeIndex: '/',
+  }),
+  mounted:function(){
+    this.activeIndex=window.location.pathname
+  },  
+  methods: {
+      handleSelect(key, keyPath) {
+        this.activeIndex=key;
+      }
+  },
+  
 }
 </script>
 
@@ -32,10 +52,8 @@ export default {
   margin-top: 0px;
 }
 .content{height:607px;background-color:#f1f7f7;overflow-y: scroll;}
-.tabsbox{}
-.tabs{position:fixed;bottom:0;z-index:10;}
-.tabs ul{display: flex;}
-.tabs ul li{flex-grow: 1;list-style-type:none;height: 60px}
+.tabs{position:fixed;bottom:0;z-index:10;width: 100%;display: flex;}
+
 .iconfont{
   font-size: 2rem;
   color: #2c3e50;
