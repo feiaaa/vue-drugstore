@@ -3,7 +3,7 @@ import Router from 'vue-router' // 默认Vue-Router
 // import Router from './myRouter' //自定义Router
 import HelloWorld from '@/components/HelloWorld'
 // import Home from '@/components/Home/Home.vue'
-// import Me from '@/components/Me/Me.vue'
+import Me from '@/components/Me/Me.vue'
 // import ItemDetail from '@/components/Item/ItemDetail.vue'
 import ChartPage from '@/components/ChartPage.vue'
 
@@ -15,11 +15,11 @@ export function createRouter(){
     routes: [
       {
         path: '/',
-        component: HelloWorld
+        component: HelloWorld,//Home
       },
-      // {path:'/hi',component:HelloWorld},
+      {path:'/hi',component:HelloWorld},
       {path:'/chart',component:ChartPage},
-      // {path:'/me',component:Me},
+      {path:'/me',component:Me},
       // {
       //   path:'/itemdetail/:id',
       //   component:ItemDetail,

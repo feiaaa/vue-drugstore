@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import App from './App'
 
-// import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
+import './index.less'
+// 全部引入
+// import ElementUI from 'element-ui'
 // Vue.use(ElementUI)
-// import './Iconfont/iconfont.css'; //字体图标
+
+// 部分引入
+// import {Carousel,Dialog,Row,Col} from 'element-ui';
+// Vue.use(Carousel).use(Row).use(Col).use(Dialog);
+
+import './Iconfont/iconfont.css'; //字体图标
 // require('!style-loader!css-loader!less-loader!./assets/less/main.less');
 
 import { createRouter } from './router';

@@ -1,6 +1,10 @@
 const merge=require('webpack-merge');
 const baseWebpackConfig=require("./webpack.base.conf");
 const VueSSRServerPlugin=require('vue-server-renderer/server-plugin')
+// const ExtractTextPlugin=require('extract-text-webpack-plugin')
+
+const isProduction = process.env.NODE_ENV === 'production'
+
 // 浏览器为目标打包
 const ServerConfig=merge(baseWebpackConfig,{
   entry:{
@@ -10,17 +14,22 @@ const ServerConfig=merge(baseWebpackConfig,{
     libraryTarget:"commonjs2",
 
   },
-  // module:{
-  //   rules:[
-  //     {
-  //       test:/\.(css|less)$/,
-  //       loader: "style-loader!css-loader!less-loader",
-  //     },
-  //   ]
-  // },
+  module:{
+    rules:[
+      {
+        test:/\.(css|less)$/,
+        use: isProduction
+          ? ExtractTextPlugin.extract({
+              use: 'css-loader',
+              fallback: 'vue-style-loader'
+            })
+          : ['vue-style-loader', 'css-loader','less-loader']
+      },
+    ]
+  },
   target:"node",
   plugins:[
-    new VueSSRServerPlugin()
+    new VueSSRServerPlugin(),
   ]
 })
 module.exports=ServerConfig
