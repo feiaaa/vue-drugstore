@@ -56,3 +56,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 疑难问题 Q&A
 [vue-lazyload 图片路径](https://blog.csdn.net/runOnWay/article/details/79052205)
+[simple安装下jest的安装方式](https://vue-test-utils.vuejs.org/zh/installation/testing-single-file-components-with-jest.html)
