@@ -1,5 +1,9 @@
 
 const target='http://life-test.leapstack.cn/'
+// 版本插件
+const webpack = require('webpack');
+var GitRevisionPlugin = require('git-revision-webpack-plugin')
+const gitRevision = new GitRevisionPlugin();
 
 // 引入@
 const resolvePath = dir => require("path").join(__dirname, dir);
@@ -44,6 +48,14 @@ module.exports = {
           "@": resolvePath("src"),
           "@@": resolvePath("src/components")
         }
-      }
+      },
+      plugins:[
+        gitRevision,
+        new webpack.DefinePlugin({
+          'process.env.VERSION': JSON.stringify(gitRevision.version()),
+          'process.env.COMMITHASH': JSON.stringify(gitRevision.commithash()),
+          'process.env.BRANCH': JSON.stringify(gitRevision.branch()),
+        }),
+      ]
     }
   }
