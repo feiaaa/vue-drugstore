@@ -2,6 +2,9 @@ const merge=require('webpack-merge');
 const baseWebpackConfig=require("./webpack.base.conf");
 const VueSSRClientPlugin=require('vue-server-renderer/client-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
+const webpack = require('webpack');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const gitRevision = new GitRevisionPlugin();
 
 // 复用
 
@@ -25,7 +28,15 @@ const ClientConfig=merge(baseWebpackConfig,{
     ]
   },
   plugins:[
-    new VueSSRClientPlugin()
+    new VueSSRClientPlugin(),
+    gitRevision,
+    new webpack.DefinePlugin({
+        'process.env': {
+              'VERSION': JSON.stringify(gitRevision.version()),
+              'COMMITHASH': JSON.stringify(gitRevision.commithash()),
+              'BRANCH': JSON.stringify(gitRevision.branch()), 
+          }
+    }),
   ]
 })
 module.exports=ClientConfig
